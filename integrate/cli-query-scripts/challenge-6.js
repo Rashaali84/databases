@@ -10,9 +10,13 @@ const DB_PATH = path.join(__dirname, '..', 'chinook.sqlite');
 
 const db = new sqlite3.Database(DB_PATH);
 
-const userInput = {};
+var myArgs = process.argv.slice(2);
+const userInput = { col: myArgs[0].trim(), stIndex: myArgs[1].trim(), noEnteries: myArgs[2].trim() };
+const finalIndex = Number(userInput.stIndex) + Number(userInput.noenteries);
+const queryString = `select count(${userInput.col}) from artist where ( artistid >=${userInput.stIndex} and artistid <=${finalIndex})`;
 
-const queryString = ``;
+//another solution 
+//const queryString = `select * from artist LIMIT ${Number(userInput.stIndex)}, ${Number(userInput.noEnteries)}`;
 
 db.all(queryString, (err, rows) => {
   if (err) {

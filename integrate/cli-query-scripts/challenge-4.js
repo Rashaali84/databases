@@ -5,14 +5,13 @@
 
 const path = require('path');
 const sqlite3 = require('sqlite3').verbose();
-
 const DB_PATH = path.join(__dirname, '..', 'chinook.sqlite');
-
 const db = new sqlite3.Database(DB_PATH);
 
-const userInput = {};
+var myArgs = process.argv.slice(2);
+const userInput = { table: myArgs[0], input: myArgs[1], order: myArgs[2], };
+const queryString = `select * from ${userInput.table} order by ${userInput.input} ${userInput.order}`;
 
-const queryString = ``;
 
 db.all(queryString, (err, rows) => {
   if (err) {

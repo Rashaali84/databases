@@ -4,7 +4,7 @@ const sqlite3 = require('sqlite3').verbose();
 const DB_PATH = path.join(__dirname, '..', 'chinook.sqlite');
 
 const db = new sqlite3.Database(DB_PATH);
-
+console.log(db);
 const userInput = {
   keyword: process.argv[2],
 };

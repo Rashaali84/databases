@@ -10,10 +10,12 @@ const DB_PATH = path.join(__dirname, '..', 'chinook.sqlite');
 
 const db = new sqlite3.Database(DB_PATH);
 
-const userInput = {};
+
 
 // hint:  `... LIKE '%${userInput.searchString}%'`
-const queryString = ``;
+var myArgs = process.argv.slice(2);
+const userInput = { table: myArgs[0].trim(), input: myArgs[1].trim(), searchString: myArgs[2].trim(), };
+const queryString = `select * from ${userInput.table} where ${userInput.input} like '%${userInput.searchString}%'`;
 
 db.all(queryString, (err, rows) => {
   if (err) {

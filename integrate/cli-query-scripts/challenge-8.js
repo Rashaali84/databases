@@ -10,9 +10,9 @@ const DB_PATH = path.join(__dirname, '..', 'chinook.sqlite');
 
 const db = new sqlite3.Database(DB_PATH);
 
-const userInput = {};
-
-const queryString = ``;
+var myArgs = process.argv.slice(2);
+const userInput = { col: myArgs[0].trim(), tble: myArgs[1].trim() };
+const queryString = `select distinct ${userInput.col} from ${userInput.tble} LIMIT 20`;
 
 db.all(queryString, (err, rows) => {
   if (err) {
